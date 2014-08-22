@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Dota 2 Addons | Decompiled Particle importer</title>
+	<link rel="stylesheet" type="text/css" href="..\assets\css\style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="assets\css\jquery-ui.theme.min.css"> -->
+	<script src="..\assets\js\jquery.min.js"></script>
+	<script src="..\assets\js\jquery-ui.min.js"></script>
+  </head>
+  <body>
+  	<div id="popup">
+  		<span>Set up/change your dota_ugc folder</span><br>
+  		
+  		<div id="input">
+  			<div class="inputField">
+  				dota_ugc folder path:<br><input  id='pathField' type="text" name="fname" placeholder="">
+				<div id="pastebtn" class="clickable">Paste</div>
+				<div id="clearbtn" class="clickable">Clear</div>
+				<div id="saveBtn" class="clickable wide">Save</div>
+  			</div>
+  		</div>
+  	</div>
+
+  	<script type="text/javascript">
+		var gui = require('nw.gui');
+
+  		$(document).ready(function(){
+  			$('#pathField').val(localStorage["ugc"]);
+  		});
+  		$( "#clearbtn" ).click(function() {
+		  	$('#pathField').val("");
+		});
+		$( "#pastebtn" ).click(function() {
+			var clipboard = gui.Clipboard.get();
+		  	$('#pathField').val(clipboard.get('text'));
+		});
+
+		$( "#saveBtn" ).click(function() {
+			localStorage["ugc"] = $('#pathField').val().replace(/\\/g, '/');
+			currentWindow = gui.Window.get();
+			currentWindow.close(true);
+		});
+  	</script>
+  </body>
+</html>
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Dota 2 Addons | Decompiled Particle importer</title>
+	<link rel="stylesheet" type="text/css" href="..\assets\css\style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="assets\css\jquery-ui.theme.min.css"> -->
+	<script src="..\assets\js\jquery.min.js"></script>
+	<script src="..\assets\js\jquery-ui.min.js"></script>
+
+	<style type="text/css">
+		#popupOverride{
+			width: 550px;
+			margin-left: 30px;
+		}
+
+		ul{
+			list-style-type: none;
+			padding:0;
+			margin:0;
+		}
+
+		li {
+			padding: 2px 2px 2px 5px;
+		}
+
+		li:hover{
+			cursor: pointer;
+			/*background: #474e60;*/
+		}
+
+		.selected{ 
+			background: #474e60;
+		}
+		.odd{
+			background: #2d2d2d;
+		}
+
+		.even{
+			background: transparent;
+		}
+	</style>
+  </head>
+  <body>
+  	<div id="popup">
+  		<span>Pick your default addon</span><br>
+  		
+			<div id="dropdown">
+  				<ul class = "folderList">
+  			<!-- 		<li class="odd">File 1</li>
+  					<li class="even">File 2</li>
+  					<li class="odd">File 3</li>
+  					<li class="even">File 4</li> -->
+  				</ul>
+  			</div>
+  		</div>
+  	</div>
+  	<div id="popupOverride" class="inputField"><div id="saveBtn" class="clickable wide">Save</div></div>
+
+  	<script type="text/javascript">
+		var gui = require('nw.gui');
+		var fs = require('fs');
+  		var selectedDiv = "";
+
+		if (typeof localStorage["ugc"] === 'undefined'){
+		   // $("#dropdown").remove();
+		   $("#dropdown").html("<center>Cannot find your dota_ugc folder. Configure that first.<center>");
+		   $("#saveBtn").remove();
+		   $(".inputField").html("<div id=\"closeBtn\" class=\"clickable wide\">Close</div></div>");
+		} else {
+			var path = localStorage["ugc"]
+			var contentFolder = path + "/content/dota_addons";
+			var gameFolder = path + "/game/dota_addons";
+			var addonArray = fs.readdirSync(contentFolder);
+
+			populateDropDown(addonArray);
+		}
+
+		function isEven(num) { return num % 2;}
+
+		function populateDropDown(folderArray) {
+			for (var i = folderArray.length - 1; i >= 0; i--) {
+				if(folderArray[i].indexOf(".") > -1) continue;
+				if (isEven(i)) {
+					$(".folderList").append("<li class=\"addon even\">"+folderArray[i]+"</li>");
+				} else {
+					$(".folderList").append("<li class=\"addon odd\">"+folderArray[i]+"</li>");
+				}
+			};
+		}
+
+		$(".addon").click(function(){
+			alert("Clicked");
+			// $(".folderList li").removeClass( "selected" );
+			$( this ).addClass( "selected" );
+			// alrt()
+		});
+
+		$( "#saveBtn" ).click(function() {
+			localStorage["addon"] = selectedDiv;
+			currentWindow = gui.Window.get();
+			currentWindow.close(true);
+		});
+		$( "#closeBtn" ).click(function() {
+			currentWindow = gui.Window.get();
+			currentWindow.close(true);
+		});
+  	</script>
+  </body>
+</html>
+

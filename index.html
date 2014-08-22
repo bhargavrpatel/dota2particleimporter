@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dota 2 Addons | Decompiled Particle importer</title>
+    <link rel="stylesheet" type="text/css" href="assets\css\style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets\css\jquery-ui.theme.min.css"> -->
+    <script src="assets\js\jquery.min.js"></script>
+    <script src="assets\js\jquery-ui.min.js"></script>
+	<script>
+	  $(function() {
+	    $( "#accordion" ).accordion({
+	      heightStyle: "content"
+	    });
+	  });
+	</script>
+  </head>
+  <body>
+	<div id="container">
+	  	<div id="header">
+	  		<div id="banner">
+	  			<img width="564" src="assets\images\banner.png">
+	  		</div>
+	  		<div id="title">
+	  			Decompiled Particle Importer <span>v1.0.0</span>
+	  		</div>
+	  	</div>
+
+	  	<div id="content">
+			<div id="contentHeader">Particle Import Path(s)</div>
+			<div id="particleContent">
+				<div class="notice">Ensure you have setup paths of Decompiled Particles' folder and your addon's content folder first</div>
+				
+			</div>
+	  	</div>
+
+  	<div id="footer">
+	  		<div id="ugcButton" class="clickable spacers">Configure UGC folder</div>
+	  		<div id="addonButton" class="clickable spacers">Set default addon</div>
+	  		<div id="preCacheButton" class="clickable">Configure Precache output</div>
+	  		<div id="importButton" class="clickable wide">Import to Addon</div>
+	  	</div>
+	</div>
+
+	<script type="text/javascript">
+		var gui = require('nw.gui');
+
+		$( "#ugcButton" ).click(function() {
+		  windInstance = openPopup("ugc.html", "Configure UGC path", false)
+		});
+		$( "#addonButton" ).click(function() {
+		  windInstance = openPopup("addon.html", "Set default addon", true)
+		});
+
+		function openPopup(fileName, titleText, big) {
+			fileName = "pages/" + fileName
+			currentWindow = gui.Window.get();		// Get main window's instance
+			width = 650; 
+			height = 180; 
+			var popup = gui.Window.get(				// Create new popup
+				window.open(fileName)
+			);
+			if(big) {
+				height = 450;
+			}
+			popup.resizeTo(width, height);				// Set its dimensions
+
+			// Offset its x,y coordinate s.t its in center of the main window
+			popup.x += (currentWindow.width-width)/2;	
+			popup.y += (currentWindow.height-height)/2;
+
+			return popup
+		}
+	</script>
+  </body>
+</html>
+

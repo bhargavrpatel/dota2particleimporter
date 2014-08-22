@@ -1,0 +1,11 @@
+{
+  "name": "Dota 2 Addons | Decompiled Particle importer",
+  "description": "Import Decompiled vpcf_c particles to your default addon",
+  "version": "0.1",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "width": 600,
+    "height": 550
+  }
+}
