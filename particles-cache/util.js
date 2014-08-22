@@ -11,7 +11,7 @@ function readJSON(filename) {
 	var content = JSON.parse(json);
 	
 	for (var i = content.particle.length -1; i >= 0; i--) {
-		console.log("particles/"+content.particle[i].relPath)
+		console.log(content.particle[i].relPath)
 		console.log(content.particle[i].updatedOn)
 	};
 	return 1;

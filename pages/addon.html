@@ -28,15 +28,16 @@
 			/*background: #474e60;*/
 		}
 
-		.selected{ 
-			background: #474e60;
-		}
 		.odd{
 			background: #2d2d2d;
 		}
 
 		.even{
 			background: transparent;
+		}
+
+		.selected{ 
+			background: #474e60;
 		}
 	</style>
   </head>
@@ -81,22 +82,26 @@
 			for (var i = folderArray.length - 1; i >= 0; i--) {
 				if(folderArray[i].indexOf(".") > -1) continue;
 				if (isEven(i)) {
-					$(".folderList").append("<li class=\"addon even\">"+folderArray[i]+"</li>");
+					$(".folderList").append("<li class=\"even\">"+folderArray[i]+"</li>");
 				} else {
-					$(".folderList").append("<li class=\"addon odd\">"+folderArray[i]+"</li>");
+					$(".folderList").append("<li class=\"odd\">"+folderArray[i]+"</li>");
 				}
 			};
 		}
 
-		$(".addon").click(function(){
-			alert("Clicked");
-			// $(".folderList li").removeClass( "selected" );
-			$( this ).addClass( "selected" );
-			// alrt()
-		});
+		$('.folderList li').click(function(){
+		 	$(this).addClass('selected').siblings().removeClass('selected');
+		 	selectedDiv = $(".selected").text();
+		})
 
 		$( "#saveBtn" ).click(function() {
-			localStorage["addon"] = selectedDiv;
+			if(selectedDiv.length < 1) {
+				alert("You have not selected any addon")
+			} else {
+				localStorage["addon"] = selectedDiv;
+				localStorage["content"] = localStorage["ugc"].concat("/content/dota_addons/").concat(localStorage["addon"]);
+				localStorage["game"] = localStorage["ugc"].concat("/content/dota_addons/").concat(localStorage["addon"]);
+			}
 			currentWindow = gui.Window.get();
 			currentWindow.close(true);
 		});
