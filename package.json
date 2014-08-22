@@ -1,11 +1,24 @@
 {
-  "name": "Dota 2 Addons | Decompiled Particle importer",
-  "description": "Import Decompiled vpcf_c particles to your default addon",
-  "version": "0.1",
+  "name": "ParticleImporter",
+  "version": "0.0.1",
+  "description": "Dota 2 decompiled particle importer",
   "main": "index.html",
   "window": {
     "toolbar": false,
     "width": 600,
     "height": 550
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bhargavrpatel/dota2particleimporter.git"
+  },
+  "author": "Bhargav Patel",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/bhargavrpatel/dota2particleimporter/issues"
+  },
+  "homepage": "https://github.com/bhargavrpatel/dota2particleimporter"
 }
