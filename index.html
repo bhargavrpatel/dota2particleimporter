@@ -6,6 +6,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="assets\css\jquery-ui.theme.min.css"> -->
     <script src="assets\js\jquery.min.js"></script>
     <script src="assets\js\jquery-ui.min.js"></script>
+    <script src="assets\js\setup.js"></script>
 	<script>
 	  $(function() {
 	    $( "#accordion" ).accordion({
@@ -34,14 +35,41 @@
 	  	</div>
 
   	<div id="footer">
-	  		<div id="ugcButton" class="clickable spacers">Configure UGC folder</div>
-	  		<div id="addonButton" class="clickable spacers">Set default addon</div>
-	  		<div id="preCacheButton" class="clickable">Configure Precache output</div>
+	  		<input id="ugcDialogue" style = "display: none;" type= "file" />
+	  		<div id="ugcButton" class="clickable wide dark">Select target addon's addoninfo.txt</div>
+	  		<div id="preCacheButton" class="clickable wide dark">Configure Precache output</div>
 	  		<div id="importButton" class="clickable wide">Import to Addon</div>
 	  	</div>
 	</div>
 
 	<script type="text/javascript">
+		var fs = require('fs');
+		function chooseFile(name) {
+			var chooser = $(name);
+			chooser.change(function(evt) {
+			console.log($(this).val());
+
+			var dirPath = $(this).val().replace(/\\/g, '/');
+			
+			var ugc_path = dirPath.substring(0, dirPath.indexOf("dota_ugc/") + "dota_ugc/".length);
+
+			if(!fs.existsSync(ugc_path) || !(fs.existsSync(ugc_path+"/content/dota_addons/"+addon_name))) {
+				alert("Invalid folder, is this inside dota_ugc? All target addons are to be inside dota_ugc folder. Redo please!");
+			} else {
+				var addon_name = dirPath.substring(dirPath.indexOf("dota_addons/") + "dota_addons/".length, dirPath.indexOf("/addoninfo.txt"))
+				localStorage["ugc_path"] = ugc_path
+				localStorage["addon_name"] = addon_name
+				localStorage["content_path"] = ugc_path+"/content/dota_addons/"+addon_name
+			}
+			
+		});
+
+			chooser.trigger('click');  
+		}
+
+		$("#ugcButton").click(function() {
+			chooseFile('#ugcDialogue');
+		});
 
 	</script>
   </body>
