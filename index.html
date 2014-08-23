@@ -42,35 +42,7 @@
 	</div>
 
 	<script type="text/javascript">
-		var gui = require('nw.gui');
-		var request = require("request");
 
-		$( "#ugcButton" ).click(function() {
-		  windInstance = openPopup("ugc.html", "Configure UGC path", false)
-		});
-		$( "#addonButton" ).click(function() {
-		  windInstance = openPopup("addon.html", "Set default addon", true)
-		});
-
-		function openPopup(fileName, titleText, big) {
-			fileName = "pages/" + fileName
-			currentWindow = gui.Window.get();		// Get main window's instance
-			width = 650; 
-			height = 180; 
-			var popup = gui.Window.get(				// Create new popup
-				window.open(fileName)
-			);
-			if(big) {
-				height = 450;
-			}
-			popup.resizeTo(width, height);				// Set its dimensions
-
-			// Offset its x,y coordinate s.t its in center of the main window
-			popup.x += (currentWindow.width-width)/2;	
-			popup.y += (currentWindow.height-height)/2;
-
-			return popup
-		}
 	</script>
   </body>
 </html>
