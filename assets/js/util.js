@@ -38,21 +38,3 @@ function firstTime() {
 		, db = new Datastore({ filename: path.join(require('nw.gui').App.dataPath, 'particles.db'), autoload: true });
 	insertTestData(db);
 }
-
-function insertTestData(db) {
-	var document = { hello: 'world'
-               , n: 5
-               , today: new Date()
-               , nedbIsAwesome: true
-               , notthere: null
-               , notToBeSaved: undefined  // Will not be saved
-               , fruits: [ 'apple', 'orange', 'pear' ]
-               , infos: { name: 'nedb' }
-               };
-
-	db.insert(document, function (err, newDoc) {   // Callback is optional
-	  // newDoc is the newly inserted document, including its _id
-	  // newDoc has no key called notToBeSaved since its value was undefined
-	});
-	alert("Shit was added");
-}
