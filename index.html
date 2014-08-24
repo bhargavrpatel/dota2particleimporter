@@ -6,14 +6,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="assets\css\jquery-ui.theme.min.css"> -->
     <script src="assets\js\jquery.min.js"></script>
     <script src="assets\js\jquery-ui.min.js"></script>
-    <script src="assets\js\setup.js"></script>
-	<script>
-	  $(function() {
-	    $( "#accordion" ).accordion({
-	      heightStyle: "content"
-	    });
-	  });
-	</script>
+    <script src="assets\js\util.js"></script>
   </head>
   <body>
 	<div id="container">
@@ -30,7 +23,7 @@
 			<div id="contentHeader">Particle Import Path(s)</div>
 			<div id="particleContent">
 				<div class="notice">Ensure you have setup paths of Decompiled Particles' folder and your addon's content folder first</div>
-				
+				<div id="fill"></div>
 			</div>
 	  	</div>
 
@@ -43,29 +36,16 @@
 	</div>
 
 	<script type="text/javascript">
-		var fs = require('fs');
-		function chooseFile(name) {
-			var chooser = $(name);
-			chooser.change(function(evt) {
-			console.log($(this).val());
-
-			var dirPath = $(this).val().replace(/\\/g, '/');
-			
-			var ugc_path = dirPath.substring(0, dirPath.indexOf("dota_ugc/") + "dota_ugc/".length);
-
-			if(!fs.existsSync(ugc_path) || !(fs.existsSync(ugc_path+"/content/dota_addons/"+addon_name))) {
-				alert("Invalid folder, is this inside dota_ugc? All target addons are to be inside dota_ugc folder. Redo please!");
-			} else {
-				var addon_name = dirPath.substring(dirPath.indexOf("dota_addons/") + "dota_addons/".length, dirPath.indexOf("/addoninfo.txt"))
-				localStorage["ugc_path"] = ugc_path
-				localStorage["addon_name"] = addon_name
-				localStorage["content_path"] = ugc_path+"/content/dota_addons/"+addon_name
+		$(document).ready(function(){ 			
+		
+			if (!localStorage["first_time"] == true || (typeof localStorage["first_time"] === "undefined")) {
+				alert("First time");
+				firstTime();
 			}
-			
+			$("#fill").append("<div>UGC Path: "+localStorage["ugc_path"]+"</div>");
+			$("#fill").append("<div>Addon Name: "+localStorage["addon_name"]+"</div>");
+			$("#fill").append("<div>Content Path:"+localStorage["content_path"]+"</div>");
 		});
-
-			chooser.trigger('click');  
-		}
 
 		$("#ugcButton").click(function() {
 			chooseFile('#ugcDialogue');

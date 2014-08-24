@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/bhargavrpatel/dota2particleimporter/issues"
   },
-  "homepage": "https://github.com/bhargavrpatel/dota2particleimporter"
+  "homepage": "https://github.com/bhargavrpatel/dota2particleimporter",
+  "devDependencies": {
+    "nedb": "^0.11.0"
+  }
 }
