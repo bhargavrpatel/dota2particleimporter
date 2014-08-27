@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dota 2 Addons | Decompiled Particle importer</title>
+    <link rel="stylesheet" type="text/css" href="..\assets\css\style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets\css\jquery-ui.theme.min.css"> -->
+    <script src="..\assets\js\jquery.min.js"></script>
+    <script src="..\assets\js\jquery-ui.min.js"></script>
+    <script src="..\assets\js\util.js"></script>
+  </head>
+  <style type="text/css">
+  #container{
+  	width: 100%;
+  	font-size: 120%
+  }
+
+  h2#container{
+  	margin-bottom: -10px;
+  }
+
+  ul{
+  	list-style: none;
+  }
+  .clickable {
+  	margin-top: 20px;
+  	margin-left: -5px;
+  }
+  </style>
+  <body>
+	<div id="container">
+			<h2>Online master.json was updated</h2>
+			<ul>
+				<li><div id="dldBtn" class="clickable wide">Download this file</div></li>
+				<li><div id='path'>Into: </div></li>
+				<li><center><div style="color: red; font-style:italic;">Restart application after doing so</div><center></li>
+			</ul>
+	<div>
+
+	<script type="text/javascript">
+		var path = require("path");
+		var direct = path.dirname(process.execPath);
+		var workingDir = direct + "\\particles-cache";
+
+		$("#path").append(workingDir);
+		$("#path").append("<div id='cpyBtn' class='clickable'>Copy path</div>");
+		// $("#path").css("display: inline;");
+
+		$("#cpyBtn").click(function() {
+			var gui = require('nw.gui');
+			var clipboard = gui.Clipboard.get(); 
+			clipboard.set(workingDir);  
+		})
+
+		$("#dldBtn").click(function() {
+			var gui = require('nw.gui');
+			gui.Shell.openExternal("https://raw.githubusercontent.com/bhargavrpatel/dota2particleimporter/master/particles.json")
+		})
+	</script>
+  </body>
+</html>
+
