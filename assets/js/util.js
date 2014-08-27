@@ -27,7 +27,10 @@ function chooseFile(name) {
 
 function postUGCSet() {
 	$(".notice").remove();
-	$(document).change()
+	$(".notice").css("display", "block");
+	$("#fill").append("<div>Addon Name: "+localStorage["addon_name"]+"</div>");
+	$("#fill").append("<div>UGC Path: "+localStorage["ugc_path"]+"</div>");
+	$("#fill").append("<div>Content Path:"+localStorage["content_path"]+"</div>");
 }
 
 	
@@ -45,13 +48,11 @@ function checkUpdate() {
 	var req = request({url: 'https://raw.githubusercontent.com/bhargavrpatel/dota2particleimporter/master/particles.json'})
 	req.pipe(JSONStream.parse('lastscan')).on('data', function (obj) { 
 		console.log(obj);
-		// if(localStorage["lastscan_github"] == obj || (typeof localStorage["lastscan_github"] === "undefined")) {
-		// 	alert("Master.json upto date")
-		// 	req.destroy();
-		// 	return 0;
-		// } else {
+		if(localStorage["lastscan_github"] == obj || (typeof localStorage["lastscan_github"] === "undefined")) {
+			req.destroy();
+			return 0;
+		} else {
 			localStorage["lastscan_github"] = obj
-			alert("Update master.json pls")
 			var gui = require('nw.gui');
 			var update_popup = gui.Window.get(
 			  window.open('pages/update.html')
@@ -59,7 +60,7 @@ function checkUpdate() {
 
 			update_popup.resizeTo(550,180)
 			return 1;
-		// }
+		}
 	}) 
 }
 

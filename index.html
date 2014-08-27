@@ -38,12 +38,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){ 	
 			checkUpdate();
-
+			$("#fill").css("display", "none")
 			// fetchParticle("particles/base_attacks/fountain_attack_attack_trail_c.vpcf");
-
-			$("#fill").append("<div>UGC Path: "+localStorage["ugc_path"]+"</div>");
-			$("#fill").append("<div>Addon Name: "+localStorage["addon_name"]+"</div>");
-			$("#fill").append("<div>Content Path:"+localStorage["content_path"]+"</div>");
 		});
 
 		$("#ugcButton").click(function() {
